@@ -3,24 +3,36 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Code Arena - Admin</title>
-		<script src="app.js"></script>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+		<script src="app.js"></script>
+		<script src="login.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-sanitize.js"></script>
 		
 
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<main>
-			<p id="demo"> This is admin page </p>
-			<button onclick="adminView()">Click Here</button>
-		</main>
-		
 
-		<div id="copyright">
-			<footer>
-          		<small><i>Copyright &copy; 2020 NerdAlert</i></small>
-			</footer>
+		<div ng-app="arenaPage" ng-controller="selectCtrl">
+			<div id="banner">
+				<h3 style="margin-left: 10px;">Code Arena</h3>
+			</div>
+
+			<div id="centerPiece" ng-bind-html="signindiv">
+			</div>
+			<button onclick="adminLogin()">Click Here</button>
 		</div>
+
 	</body>
 	
 </html>

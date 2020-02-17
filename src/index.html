@@ -14,16 +14,47 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<script src="app.js"></script>
+		<script src="login.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<main>
-			<div id="banner" style="background-color: rgb(0, 0, 0); height:40px;">
-				<h3 style="color: rgb(255, 255, 255);">Code Arena</h3>
+
+		<div ng-app="arenaPage" ng-controller="selectCtrl">
+			<div id="banner">
+				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div ng-app="" id="signin">
+			<div id="centerPiece">
+				<form name="roleForm">
+					<select name="roleSelector" ng-model="selectedRole" ng-options="x for x in compRole"></select> <br>
+				</form>
+
+				<button ng-disabled="roleForm.roleSelector.$pristine" ng-click="adminLogin()">Continue</button>
+			</div>
+		</div>
+	</body>
+	
+</html>
+
+
+<!--
+		<div id="copyright">
+			<footer>
+          		<small><i>Copyright &copy; 2020 NerdAlert</i></small>
+			</footer>
+		</div>
+#copyright {
+	margin: 0;
+	position: absolute;
+	top: 98%;
+	left:0%;
+	transform: translate(0%, -50%);
+}
+
+		
+Admin Sign In
+<div ng-app="" id="signin">
 				<div style="text-align: right;">
 					<label>Email:</label>
 				    <input type="text" ng-model="yourName" placeholder="Email">
@@ -37,12 +68,18 @@
 	      		</div>
 
 			</div>
-		</main>
-		<div id="copyright">
-			<footer>
-          		<small><i>Copyright &copy; 2020 NerdAlert</i></small>
-			</footer>
-		</div>
-	</body>
-	
-</html>
+
+#signin {
+	background-color: rgb(0, 80, 255);
+	color: rgb(255, 255, 255);
+	margin: 0;
+	padding: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+
+		-->
