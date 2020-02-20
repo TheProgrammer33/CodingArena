@@ -13,7 +13,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<script src="app.js"></script>
+		<script src="app.JS"></script>
 		<script src="login.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="style.css">
@@ -25,12 +25,8 @@
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div id="centerPiece">
-				<form name="roleForm">
-					<select name="roleSelector" ng-model="selectedRole" ng-options="x for x in compRole"></select> <br>
-				</form>
-
-				<button ng-disabled="roleForm.roleSelector.$pristine" ng-click="adminLogin()">Continue</button>
+			<div id="centerPiece" signin>
+				
 			</div>
 		</div>
 	</body>
