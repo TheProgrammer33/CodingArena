@@ -40,3 +40,19 @@ button {
 	right: 5%;
 	bottom: 5%;
 }
+
+#adminLogin {
+	width: 30vh;
+	height: 25vh;
+	min-width: 300px;
+	min-height: 160px;
+	background-color: #f7f7f7;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	color: rgb(0, 0, 0);
+	margin: 0;
+	padding: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

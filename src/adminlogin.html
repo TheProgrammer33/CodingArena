@@ -25,8 +25,21 @@
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div signin id="centerPiece">
-				<form name="roleForm"><select name="roleSelector" ng-model="selectedRole" ng-options="x for x in compRole"></select> <br></form><a href="adminlogin.html"><button ng-disabled="roleForm.roleSelector.$pristine">Continue</button></a>
+			<div id="adminLogin">
+				<div ng-app="" id="signin">
+				<div style="text-align: right;">
+					<label>Email:</label>
+				    <input type="text" ng-model="yourName" placeholder="Email">
+				    <br>
+					<label>Password:</label>
+				    <input type="Password" placeholder="Password">
+		    		<hr>
+		    		<a href="admin.html">
+		    		<button>Login</button>
+		    		</a>
+	      		</div>
+
+			</div>
 			</div>
 		</div>
 	</body>
