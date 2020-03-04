@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Code Arena - Admin</title>
+		<title>Code Arena - Sign In</title>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 		<!-- Latest compiled and minified CSS -->
@@ -13,13 +13,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
 		<script src="app.js"></script>
-		<script src="login.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-sanitize.js"></script>
-		
+		<script src="adminHandler.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="adminStyle.css">
 	</head>
 	<body>
 
@@ -28,10 +25,19 @@
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<h1 style="text-align: center;">Welcome Admins</h1>
-			<a href="adminmainpage.html">Create Competition</a>
+			<div id="adminQuestionSection">
+				<div questions id="questions">
+					<div id="questionTemplate">
+							<h2>Question 1</h2>
+							<p>Print Hello World</p>
+							<textarea id="question" placeholder="Enter code here..."></textarea>
+							<br>
+							<a href="index.html"><button>Submit</button></a>
+					</div>
+				</div>
+				<button id="newQuestion" onclick="addQuestion()">New Question</button>
+			</div>
 		</div>
-
 	</body>
 	
 </html>
