@@ -20,22 +20,23 @@
 	</head>
 	<body>
 
-		<div ng-app="arenaPage" ng-controller="selectCtrl">
+		<div>
 			<div id="banner">
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div id="adminQuestionSection">
+			<div ng-app="arenaPage" ng-controller="selectCtrl" id="adminQuestionSection">
+				<button class="buttons">Save</button><br>
 				<div questions id="questions">
-					<div id="questionTemplate">
-							<h2>Question 1</h2>
-							<p>Print Hello World</p>
-							<textarea id="question" placeholder="Enter code here..."></textarea>
-							<br>
-							<a href="index.html"><button>Submit</button></a>
+					<div>
+						<h2>Question</h2>
+						<textarea placeholder="Enter question here..."></textarea>
+						<br>
+						<textarea placeholder="Enter expected output here..."></textarea>
+						<br>
 					</div>
 				</div>
-				<button id="newQuestion" onclick="addQuestion()">New Question</button>
+				<button class="buttons" ng-click="addQuestion()">New Question</button>
 			</div>
 		</div>
 	</body>
