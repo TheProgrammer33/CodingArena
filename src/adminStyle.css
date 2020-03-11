@@ -25,16 +25,3 @@ textarea {
 	width: 50%;
 	height: 20%;
 }
-.buttons {
-	width: 150px;
-	height: 40px;
-	background-color: #006fde;
-	color: white;
-	padding: 5px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	position: absolute;
-	right: 5%;
-	margin-bottom: 10px;
-}
