@@ -13,32 +13,56 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<script src="compScript.js"></script>
+		
+		<script src="../Controllers/competitorController.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="compStyle.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/compStyle.css">
 	</head>
 	<body>
 
-		<div ng-app="" ng-controller="">
+		<div ng-app="competitorPage" ng-controller="competitorCtrl as competitorCtrl">
 			<div id="banner" style="display: flex; align-items: baseline;">
 				<div style="flex: 1">
 					<h3 id="bannerTitle">Time Remaining: {{timeLeft}}</h3>
 				</div>
 				<div class="text-right">
-					<button class="btn btn-outline-light" style="margin-right: 10px;">
+					<button class="btn btn-outline-light" style="margin-right: 10px;"
+						ng-click="competitorCtrl.showScoreboard()">
 						Scoreboard
 					</button>
 				</div>
 			</div>
 
-			<div>
+			<div id="scoreModal">
+				<div id="modal-content">
+					<div style="text-align: right;">
+					    <button ng-click="competitorCtrl.hideScoreboard()"
+					    	class="btn btn-danger">
+					    	&times;
+					    </button>
+				    </div>
+				    <table>
+				    	<tr>
+				    		<th>Team</th>
+				    		<th ng-repeat="question in competitorCtrl.questions">{{$index + 1}}</th>
+				    	</tr>
+				    	<tr ng-repeat="teams in competitorCtrl.teams">
+				    		<th>{{competitorCtrl.teams[$index]}}</th>
+				    		<th ng-repeat="question in competitorCtrl.questions"></th>
+				    	</tr>
+				    </table>
+				</div>
+			</div>
+
+			<div style="margin-left: 20px;">
 				<div>
-					<div ng-repeat="question in questionCtrl.questions">
+					<div ng-repeat="question in competitorCtrl.questions">
 						<h3>Question {{$index + 1}}</h3>
-						<p>Some Question from the Database</p>
+						<p>{{competitorCtrl.questions[$index]}}</p>
 						<textarea id="question" placeholder="Enter code here..."></textarea>
 						<br>
 						<button ng-click="">Submit</button>
+						<hr ng-if="!$last" style="border: 1px solid #d1d1d1;">
 					</div>
 				</div>
 			</div>

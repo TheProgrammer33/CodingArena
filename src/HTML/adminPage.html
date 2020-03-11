@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Code Arena - Sign In</title>
+		<title>Code Arena - Admin</title>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 		<!-- Latest compiled and minified CSS -->
@@ -13,10 +13,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<script src="app.js"></script>
-		<script src="adminHandler.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="adminStyle.css">
+		<script src="../Controllers/adminController.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../CSS/adminStyle.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/banner.css">
+
 	</head>
 	<body>
 
@@ -32,11 +34,15 @@
 						<div ng-repeat="question in questionCtrl.questions">
 							<div style="display:flex">
 								<h2 style="flex: 1">Question {{$index + 1}}</h2>
-								<button ng-if="questionCtrl.questions.length !== 1" class="btn btn-danger" ng-click="questionCtrl.removeQuestion($index)">X</button>
+								<button ng-if="questionCtrl.questions.length !== 1"
+									class="btn btn-danger"
+									ng-click="questionCtrl.removeQuestion($index)">
+									X
+								</button>
 							</div>
 							<textarea placeholder="Enter question here..." ng-model="question.questionText"></textarea>
 							<br>
-							<input type="file" fileread="question.outputFile" accept=".css">
+							<input type="file" fileread="question.outputFile" accept=".csv">
 							<!-- <textarea placeholder="Enter expected output here..." ng-model="question.outputText"></textarea> -->
 							<br>
 							<hr ng-if="!$last">

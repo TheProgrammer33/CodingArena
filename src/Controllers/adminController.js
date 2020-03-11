@@ -5,6 +5,7 @@ angular.module("arenaPage", [])
   		_this.questions = [];
 
   		_this.addQuestion = function() {
+  			//create objects to handle questions and answers
   			_this.questions.push({});
   		};
 
