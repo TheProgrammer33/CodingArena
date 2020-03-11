@@ -20,12 +20,12 @@
 	</head>
 	<body>
 
-		<div ng-app="arenaPage" ng-controller="selectCtrl">
+		<div ng-app="loginPage" ng-controller="selectCtrl">
 			<div id="banner">
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div signin id="centerPiece">
+			<div centerLogin id="centerPiece">
 				<form name="roleForm"><select name="roleSelector" ng-model="selectedRole" ng-options="x for x in compRole"></select> <br></form><a href="adminlogin.html"><button ng-disabled="roleForm.roleSelector.$pristine">Continue</button></a>
 			</div>
 		</div>
