@@ -11,8 +11,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<!-- Popper JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<script src="app.js"></script>
 		<script src="login.js"></script>
 
@@ -20,13 +18,72 @@
 	</head>
 	<body>
 
-		<div ng-app="loginPage" ng-controller="selectCtrl">
+		<div ng-app="loginPage" ng-controller="loginCtrl as loginCtrl">
 			<div id="banner">
 				<h3 style="margin-left: 10px;">Code Arena</h3>
 			</div>
 
-			<div centerLogin id="centerPiece">
-				<form name="roleForm"><select name="roleSelector" ng-model="selectedRole" ng-options="x for x in compRole"></select> <br></form><a href="adminlogin.html"><button ng-disabled="roleForm.roleSelector.$pristine">Continue</button></a>
+			<div ng-switch="loginCtrl.state" class="center-piece">
+				<div ng-switch-default>
+					<form name="roleForm" style="height: 70px">
+						<select name="roleSelector" ng-model="loginCtrl.selectedRole"
+								ng-options="option as option.label for option in loginCtrl.compRole"></select>
+					</form>
+					<br>
+
+					<div class="text-right">
+						<button ng-click="loginCtrl.selectRole(loginCtrl.selectedRole)"
+								class="btn btn-primary" ng-class="{'disabled': !loginCtrl.selectedRole}">
+							Continue
+						</button>
+					</div>
+				</div>
+
+				<div ng-switch-when="ADMIN_LOGIN">
+					<div class="text-right">
+						<label>Email:</label>
+					    <input type="text" ng-model="yourName" placeholder="Email">
+					    <br>
+						<label>Password:</label>
+					    <input type="Password" placeholder="Password">
+			    		<hr>
+			    		<a href="admin.html"
+							class="btn btn-primary">
+							Login
+						</a>
+		      		</div>
+				</div>
+
+				<div ng-switch-when="ENTER_CODE">
+					<div class="text-right">
+						<label>Code:</label>
+					    <input type="text" ng-model="loginCtrl.competitorCode" placeholder="Code">
+					    <br>
+			    		<hr>
+			    		<button ng-click="loginCtrl.competitorSteps('code_entered')"
+							class="btn btn-primary" ng-class="{'disabled': !loginCtrl.competitorCode}">
+							Join
+						</button>
+		      		</div>
+				</div>
+
+				<div ng-switch-when="PICK_TEAM">
+					<div class="text-right">
+						<div style="display:flex">
+							<label style="flex: 1">Team:</label>
+							<form name="roleForm" style="height: 70px">
+								<select name="roleSelector" ng-model="loginCtrl.selectedTeam"
+										ng-options="option as option.teamName for option in loginCtrl.teams"></select>
+							</form>
+						</div>
+					    <br>
+			    		<hr>
+			    		<a href="competitorPage.html"
+							class="btn btn-primary" ng-class="{'disabled': !loginCtrl.selectedTeam}">
+							Start
+						</a>
+		      		</div>
+				</div>
 			</div>
 		</div>
 	</body>

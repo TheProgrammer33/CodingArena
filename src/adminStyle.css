@@ -7,20 +7,21 @@ div h3 {
 	height:40px;
 }
 
-.center-piece {
-	min-width: 200px;
+#adminQuestionSection {
+	height: 75%;
+	width: 75%;
 	background-color: #f7f7f7;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	color: rgb(0, 0, 0);
+	border: solid;
 	margin: 0;
 	padding: 20px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	overflow:auto;
 }
 
-select {
-	width: 100%;
-	min-width: 150px;
+textarea {
+	width: 50%;
+	height: 20%;
 }
