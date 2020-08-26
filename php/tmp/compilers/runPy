@@ -1,0 +1,37 @@
+#!/bin/bash
+inputFile=$1
+TMP_DIR=/opt/bitnami/apache2/htdocs/php/tmp
+if [ $# -ne 1 ] 
+then
+	echo "Usage: $0 option"
+else
+	> /opt/bitnami/apache2/htdocs/php/errors.txt
+	> /opt/bitnami/apache2/htdocs/php/output.txt
+	echo $inputFile
+	
+	fileName=$(basename $inputFile .txt).py
+	echo $fileName
+
+	string="import os"
+
+	if grep -q $string $inputFile
+	then
+		echo "Not permitted action!" > /opt/bitnami/apache2/htdocs/php/errors.txt
+		exit 1
+	fi
+
+	echo '#!/usr/bin/env python' >> $fileName
+	cat $inputFile
+	cat $inputFile >> $fileName
+	python -m py_compile $fileName 2> /opt/bitnami/apache2/htdocs/php/errors.txt
+	if [ -s /opt/bitnami/apache2/htdocs/php/errors.txt ]
+	then
+		echo "Encountered Errors"
+	else
+		echo "Comiled correctly"
+		chmod 755 ./$fileName
+		./$fileName 1> /opt/bitnami/apache2/htdocs/php/output.txt
+	fi
+	rm $fileName
+	cat /opt/bitnami/apache2/htdocs/php/output.txt
+fi

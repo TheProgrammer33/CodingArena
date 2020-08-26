@@ -1,18 +1,66 @@
 
 .center-piece {
-	min-width: 200px;
-	background-color: #f7f7f7;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	color: rgb(0, 0, 0);
+	min-width: 275px;
+	min-height: 200px;
+	max-width: 400px;
+	background-color: #0a0a14;
+	box-shadow: 0 0px 8px 1 rgba(128, 129, 255, 0.6), 0 6px 20px 0 rgba(128, 129, 255, 0.59);
 	margin: 0;
 	padding: 20px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+}
+
+.alignment {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 90vh;
+}
+
+img {
+	margin-left: 100px;
+	width: 400px;
+	box-shadow: 0px 0px 8px 1px rgba(128,129,255, 0.6), 0 6px 20px 0 rgba(128,129,255, 0.59);
+}
+
+label {
+	color: white;
+}
+
+.center-piece * {
+	font-family: Monospace;
+	font-size: 15px;
+}
+
+.defaultLogin * {
+	text-align: center;
+}
+
+.center-piece select {
+	height: 23px;
+	font-size: 15px;
+}
+
+.loginSelector {
+	width: 175px;
+	margin-top: 15px;
+}
+
+#button {
+	margin-top: 15px;
+}
+
+#button:hover {
+	background-color: #FFFFFF;
 }
 
 select {
 	width: 100%;
 	min-width: 150px;
+}
+
+body {
+	background-color: black;
+	background-image: url("../../CodingArenaImg/BinaryCodeTunnelBluePreviewPIC.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
 }

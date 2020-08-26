@@ -1,0 +1,32 @@
+#!/bin/bash
+inputFile=$1
+if [ $# -ne 1 ]
+then
+	echo "Usage: $0 option"
+else
+	MYPATH=/opt/bitnami/apache2/htdocs/php
+	> $MYPATH/errors.txt
+	> $MYPATH/output.txt
+	fileName=$(basename $inputFile .txt).py
+	
+	string="import os"
+
+	if grep -q $string $inputFile
+	then
+		echo "Not permitted action!" > $MYPATH/errors.txt
+		exit 1
+	fi
+
+	echo '#!/usr/bin/env python3' >> $fileName
+	cat $inputFile >> $fileName
+	python3 -m py_compile $fileName 2> $MYPATH/errors.txt
+	if [ -s $MYPATH/errors.txt ]
+	then
+		echo "Encountered Errors"
+	else
+		echo "Comiled correctly"
+		 chmod 755 ./$fileName
+		./$fileName <"input.txt" 1> $MYPATH/output.txt
+	fi
+	rm $fileName
+fi

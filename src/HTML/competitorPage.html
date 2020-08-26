@@ -18,54 +18,94 @@
 
 		<link rel="stylesheet" type="text/css" href="../CSS/compStyle.css">
 	</head>
-	<body>
+	<body class="background">
 
-		<div ng-app="competitorPage" ng-controller="competitorCtrl as competitorCtrl">
-			<div id="banner" style="display: flex; align-items: baseline;">
-				<div style="flex: 1">
-					<h3 id="bannerTitle">Time Remaining: {{timeLeft}}</h3>
-				</div>
-				<div class="text-right">
-					<button class="btn btn-outline-light" style="margin-right: 10px;"
-						ng-click="competitorCtrl.showScoreboard()">
-						Scoreboard
-					</button>
-				</div>
-			</div>
+		<div ng-app="competitorPage" ng-controller="competitorCtrl as competitorCtrl" style="width: 100%;">
+			<div ng-switch="competitorCtrl.state" style="display: flex; width:100%;">
+			
 
-			<div id="scoreModal">
-				<div id="modal-content">
-					<div style="text-align: right;">
-					    <button ng-click="competitorCtrl.hideScoreboard()"
-					    	class="btn btn-danger">
-					    	&times;
-					    </button>
-				    </div>
-				    <table>
-				    	<tr>
-				    		<th>Team</th>
-				    		<th ng-repeat="question in competitorCtrl.questions">{{$index + 1}}</th>
-				    	</tr>
-				    	<tr ng-repeat="teams in competitorCtrl.teams">
-				    		<th>{{competitorCtrl.teams[$index]}}</th>
-				    		<th ng-repeat="question in competitorCtrl.questions"></th>
-				    	</tr>
-				    </table>
-				</div>
-			</div>
-
-			<div style="margin-left: 20px;">
-				<div>
-					<div ng-repeat="question in competitorCtrl.questions">
-						<h3>Question {{$index + 1}}</h3>
-						<p>{{competitorCtrl.questions[$index]}}</p>
-						<textarea id="question" placeholder="Enter code here..."></textarea>
-						<br>
-						<button ng-click="">Submit</button>
-						<hr ng-if="!$last" style="border: 1px solid #d1d1d1;">
+				<div ng-switch-default style="width:100%">
+					<div id="banner" style="display: flex; align-items: baseline;">
+						<div style="flex: 1">
+							<h3 id="bannerTitle">Coding Arena</h3>
+						</div>
+					</div>
+					<div>
+						<h1>Competition Has Not Started Yet</h1>
 					</div>
 				</div>
-			</div>
+
+				<div ng-switch-when="OVER" style="width:100%">
+					<div id="banner" style="display: flex; align-items: baseline;">
+						<div style="flex: 1">
+							<h3 id="bannerTitle">Coding Arena</h3>
+						</div>
+					</div>
+					<div>
+						<h1>Competition Has Ended</h1>
+						<p>The competition is over</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="PROGRESS" style="width:100%">
+					<div>				
+						<div id="banner" style="display: flex; align-items: baseline;">
+							<div style="flex: 1">
+								<h3 id="bannerTitle">Time Remaining: {{competitorCtrl.timeLeft}}</h3>
+							</div>
+							<div class="text-right">
+								<button class="btn btn-outline-light" style="margin-right: 10px;"
+									ng-click="competitorCtrl.showScoreboard()">
+									Scoreboard
+								</button>
+							</div>
+						</div>
+
+						<div id="scoreModal">
+							<div id="modal-content">
+								<div style="text-align: right;">
+									<button ng-click="competitorCtrl.hideScoreboard()"
+										class="btn btn-outline-danger"
+										class="button">
+										&times;
+									</button>
+								</div>
+								<table>
+									<tr>
+										<th>Team</th>
+										<th>Points</th>
+									</tr>
+									<tr ng-repeat="teams in competitorCtrl.teams">
+										<th>{{competitorCtrl.teams[$index]}}</th>
+										<th>{{competitorCtrl.points[$index]}}</th>
+									</tr>
+								</table>
+							</div>
+						</div>
+						
+						<div style="margin-left: 20px;">
+							<div class="questions">
+								<h2>{{competitorCtrl.competitionName}}</h2>
+								<div style="display:flex; margin-top: 20px">
+									<label style="margin-right: 10px">Language:</label>
+									<select name="languageSelect" ng-model="competitorCtrl.selectedLanguage">
+										<option ng-repeat="language in competitorCtrl.languages" value="{{language}}">{{language}}</option>
+									</select>
+								</div>
+								<div ng-repeat="question in competitorCtrl.questions">
+									<h3>Question {{$index + 1}}</h3>
+									<p>{{question.question}}</p>
+									<textarea spellcheck="false" id="question" ng-model="question.codeToCompile" placeholder="Enter code here..." onkeydown="insertTab(this, event)"></textarea>
+									<br>
+									<p>{{question.compiled}}</p>
+									<button ng-click="competitorCtrl.compileCode($index)">Submit</button>
+									<hr ng-if="!$last" style="border: 1px solid #8081ff;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
 		</div>
 	</body>
 	

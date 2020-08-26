@@ -1,0 +1,12 @@
+using System;
+
+namespace IO {
+	class IO {
+		public static void Main(String[] args) {
+			string val;
+			val = Console.ReadLine();
+			Console.WriteLine(val);
+		}
+	}
+}
+		

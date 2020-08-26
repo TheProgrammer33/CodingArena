@@ -1,0 +1,2 @@
+teamName	points
+nerdalert	10

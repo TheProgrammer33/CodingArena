@@ -1,0 +1,4 @@
+name	email	permissions
+Dylan Bryant	dylan.bryant@snhu.edu	Administrator
+Jack Canducci	john.canducci@snhu	Administrator
+Jack Canducci	Ihopethisworks	Administrator

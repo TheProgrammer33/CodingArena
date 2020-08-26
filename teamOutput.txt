@@ -1,0 +1,5 @@
+teamName	points
+Minecrafters	0
+US Navy	0
+Oingo Boingo	0
+Nerd Alert	0

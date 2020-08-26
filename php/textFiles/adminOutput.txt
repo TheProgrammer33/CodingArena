@@ -1,0 +1,6 @@
+name	email	permissions
+Dylan Bryant	dylan.bryant@snhu.edu	Administrator
+Jack Canducci	john.canducci@snhu	Administrator
+Jack 2	jcanducci@gmail.com	Administrator
+Dylan Bryant	dylan.m.bryant@gmail.com	Administrator
+Catherine Gallaher	catherine.gallaher@snhu.edu	Administrator

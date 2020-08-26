@@ -1,0 +1,4 @@
+questionNum	questionText
+0	create a program to print hello world
+1	If a man walks a mile south then turns 90 degrees and walks a mile, then turns 90 degrees and walks a mile, he returns to where he started. What color bear did he see?
+2	this is a new question at 3:52PM

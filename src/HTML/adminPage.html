@@ -13,52 +13,209 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<!--AJAX for data transfer-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 		<script src="../Controllers/adminController.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 
 		<link rel="stylesheet" type="text/css" href="../CSS/adminStyle.css">
-		<link rel="stylesheet" type="text/css" href="../CSS/banner.css">
 
 	</head>
-	<body>
-
+	<body class="background">
+		
 		<div>
-			<div id="banner">
-				<h3 style="margin-left: 10px;">Code Arena</h3>
-			</div>
-
-			<div ng-app="arenaPage" ng-controller="questionCtrl as questionCtrl" id="adminQuestionSection"
-		 		 style="display:flex">
-		 		<div style="flex: 1">
-					<div id="questions">
-						<div ng-repeat="question in questionCtrl.questions">
-							<div style="display:flex">
-								<h2 style="flex: 1">Question {{$index + 1}}</h2>
-								<button ng-if="questionCtrl.questions.length !== 1"
-									class="btn btn-danger"
-									ng-click="questionCtrl.removeQuestion($index)">
-									X
-								</button>
-							</div>
-							<textarea placeholder="Enter question here..." ng-model="question.questionText"></textarea>
-							<br>
-							<input type="file" fileread="question.outputFile" accept=".csv">
-							<!-- <textarea placeholder="Enter expected output here..." ng-model="question.outputText"></textarea> -->
-							<br>
-							<hr ng-if="!$last">
-						</div>
-					</div>
-
-					<div class="text-right">
-						<button class="btn btn-success" ng-click="questionCtrl.addQuestion()">New Question</button>
+			<div ng-app="arenaPage" ng-controller="questionCtrl as questionCtrl">
+				<div id="banner">
+					<div>
+						<span onclick="openNavigation()" style="font-size: 30px;" class="fas fa-bars"></span>
+						<h3 style="flex: 1">Coding Arena</h3></li>
+						<button id="settings" class="btn btn-outline-light" ng-click="questionCtrl.openSettings()">{{questionCtrl.pageName}}</button>
 					</div>
 				</div>
 
-				<div class="pl-4">
-					<button class="btn btn-primary" ng-click="questionCtrl.saveEverything()">Save</button>
+				<h1 style="margin-left: 200px">{{questionCtrl.competitionName}}</h1>
+
+				<div id="competitionnav" class="compnav">
+					<a style="font-size: 36;" onclick="closeNavigation()">&times;</a>
+					<div ng-repeat="comps in questionCtrl.competitions">
+						<a ng-click="questionCtrl.selectCompetition(comps.name, comps.id)">{{comps.name}}</a>
+						<i ng-click="questionCtrl.removeComp($index)" class="fas fa-trash"></i>
+					</div>
+					<div style="padding-top: 10px; padding-left: 10px;">
+						<button class="btn btn-primary"
+							ng-click="questionCtrl.addComp('Open')">
+							+ Competition
+						</button>
+					</div>
+
+				</div>
+
+				<div id="addCompModal" class="addModal">
+					<div id="modal-content">
+						<div style="text-align: right;">
+							<button ng-click="questionCtrl.addComp('Close')"
+								class="btn btn-danger">
+								&times;
+							</button>
+						</div>
+						<div>
+							<div style="flex: 1" class="addSection">
+								<label for="competitionName">Competition Name: </label>
+								<input type="text" id="competitionName" ng-model="loginCtrl.competitionName" name="name">
+								<br>
+								<label for="competitionStartTime">Competition Start Time: </label>
+								<input type="datetime-local" id="competitionStartTime" ng-model="loginCtrl.competitionStartTime" name="start">
+								<br>
+								<label for="competitionEndTime">Competition End Time: </label>
+								<input type="datetime-local" id="competitionEndTime" ng-model="loginCtrl.competitionEndTime" name="end">
+								<br>
+								<button class="btn btn-primary" ng-click="questionCtrl.addComp('Save')">Save</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+
+																												
+				<div ng-switch="questionCtrl.state" id="adminQuestionSection" class="background" style="display:flex">
+					<div ng-switch-when="COMPETITION" class="background">
+						<div style="flex: 1">
+							<div id="questions">
+								<div ng-repeat="question in questionCtrl.questions">
+									<div style="display:flex">
+										<h2 style="flex: 1">Question {{$index + 1}}</h2>
+										<button ng-if="questionCtrl.questions.length !== 1"
+		 									class="btn btn-outline-danger"
+	     										class="button"
+    											ng-click="questionCtrl.removeQuestion($index)">X
+										</button>
+									</div>
+									<textarea placeholder="Enter question here..." ng-model="question.questionText"></textarea>
+									<br>
+									<input type="file" fileread="question.outputFile" accept=".csv">
+									<!-- <textarea placeholder="Enter expected output here..." ng-model="question.outputText"></textarea> -->
+									<br>
+									<hr ng-if="!$last">
+								</div>
+							</div>
+
+							<div class="text-right">
+								<button class="btn btn-outline-success" 
+									class="button"
+									ng-click="questionCtrl.addQuestion()">New Question</button>
+							</div>
+						</div>
+
+						<div>
+							<button class="btn btn-outline-primary" 
+								class="button"
+								ng-click="questionCtrl.saveEverything()">Save</button>
+						</div>																							
+					</div>
+
+					<div ng-switch-when="SETTINGS" style="width:100%">
+						<div class="settingsFormat">
+							<div class="addSection">
+								<h2>Competition ID: {{questionCtrl.compID}}</h2>
+							</div>
+							<div style="display: flex;" class="settingsFormat">
+								<div class="addSection">
+									<h2>Teams</h2>
+									<ul>
+										<li ng-repeat="team in questionCtrl.teams">
+											{{team}}
+											<i ng-click="questionCtrl.removeTeam(team, $index)" class="fas fa-trash"></i>
+										</li>
+									</ul>
+									<button ng-click="questionCtrl.addTeam('Open')"
+										class="btn btn-outline-success"
+										class="button"
+										>+ Team</button>
+								</div>
+								<div class="addSection">
+									<h2>Admins</h2>
+									<ul>
+										<li ng-repeat="admin in questionCtrl.admins">
+											{{admin.name}} - {{admin.email}}
+											<i ng-click="questionCtrl.removeAdmin(admin.email, $index)"class="fas fa-trash"></i>
+										</li>
+									</ul>
+									<button ng-click="questionCtrl.addAdmin('Open')"
+									        class="btn btn-outline-success"
+										class="button"
+										>+ Admin</button>
+								</div>								
+							</div>
+						<!--<div style="margin-top: 10px;">
+								<button class="btn btn-primary" ng-click="questionCtrl.saveSettings()">Save</button>
+						</div>-->
+						</div>
+						<div id="addAdminModal" class="addModal">
+							<div id="modal-content">
+								<div style="text-align: right;">
+									<button ng-click="questionCtrl.addAdmin('Close')"
+		 								class="btn btn-outline-danger"
+										class="button">
+										&times;
+									</button>
+								</div>			
+								<div>
+									<label>Name:</label>
+									<input id="adminName" name="nameBox" type="text" ng-model="nameOfAdmin" placeholder="Name">
+									<br>
+									<label>Email:</label>
+									<input id="adminEmail" name="emailBox" type="email" placeholder="Email">
+									<br>
+									<label>Password:</label>
+									<input id="adminPassword" name="passwordBox" type="password" placeholder="Password">
+
+								</div>
+								<div style="text-align:right;">
+									<button ng-click="questionCtrl.addAdmin('Save')"
+		 								class="btn btn-outline-primary"
+										class="button">
+	   										Save
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div id="addTeamModal" class="addModal">
+							<div id="modal-content">
+								<div style="text-align: right;">
+									<button ng-click="questionCtrl.addTeam('Close')"
+		 								class="btn btn-outline-danger"
+										class="button">
+										&times;
+									</button>
+								</div>			
+								<div>
+									<label>Team Name:</label>
+									<input id="teamName" name="teamNameBox" type="text" ng-model="nameOfTeam" placeholder="Team Name">
+								</div>
+								<div style="text-align:right;">
+									<button ng-click="questionCtrl.addTeam('Save')"
+		 								class="btn btn-outline-primary"
+										class="button">
+	   										Save
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
 				</div>
 			</div>
 		</div>
+		
 	</body>
 	
 </html>

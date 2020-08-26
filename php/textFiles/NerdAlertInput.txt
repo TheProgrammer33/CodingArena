@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h> 
+
+using namespace std;
+
+int main()
+{
+    string N;
+    getline(cin, N);
+    
+    reverse(N.begin(), N.end());
+    
+    cout << N;
+    
+    return 0;
+}
